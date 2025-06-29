@@ -44,7 +44,7 @@ router.put("/:id", adminAuth, async (req, res) => {
 // GET /api/Cards
 router.get("/", async (req, res) => {
   try {
-    const result = await db.query("SELECT * FROM Cards");
+    const result = await db.query('select * from "Cards"');
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching Cards:", error);
