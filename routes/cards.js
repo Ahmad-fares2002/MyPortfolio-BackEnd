@@ -9,7 +9,7 @@ router.post("/", adminAuth, async (req, res) => {
   const { title, description } = req.body;
   try {
     const section = await db.query(
-      "INSERT INTO Cards (title, description) VALUES ($1, $2) RETURNING *",
+      'INSERT INTO "Cards" (title, description) VALUES ($1, $2) RETURNING *',
       [title, description]
     );
     res.status(201).json({ section: section.rows[0] });
@@ -26,8 +26,9 @@ router.put("/:id", adminAuth, async (req, res) => {
 
   try {
     const updatedSection = await db.query(
-      "UPDATE Cards SET title = $1, description = $2 WHERE id = $3 RETURNING *",
-      [title, description, id]
+      `UPDATE "Cards" SET title='Immersive Experience', description = 'I have built AR/VR apps and interactive experiences using cutting-edge technology.' WHERE id = 1 RETURNING *`[
+        (title, description, id)
+      ]
     );
 
     if (updatedSection.rows.length === 0) {
@@ -58,7 +59,7 @@ router.delete("/:id", adminAuth, async (req, res) => {
 
   try {
     const result = await db.query(
-      "DELETE FROM Cards WHERE id = $1 RETURNING *",
+      'DELETE FROM "Cards" WHERE id = $1 RETURNING *',
       [id]
     );
 
