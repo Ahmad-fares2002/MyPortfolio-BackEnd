@@ -19,7 +19,7 @@ router.put("/:id", adminAuth, async (req, res) => {
 
   try {
     const updatedSection = await db.query(
-      `UPDATE "sections" SET title= $1 content = $1 WHERE id = $3 RETURNING *`,
+      `UPDATE "sections" SET title= $1, content = $1 WHERE id = $3 RETURNING *`,
       [title, content, id]
     );
 
