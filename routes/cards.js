@@ -26,9 +26,8 @@ router.put("/:id", adminAuth, async (req, res) => {
 
   try {
     const updatedSection = await db.query(
-      `UPDATE "Cards" SET title='Immersive Experience', description = 'I have built AR/VR apps and interactive experiences using cutting-edge technology.' WHERE id = 1 RETURNING *`[
-        (title, description, id)
-      ]
+      `UPDATE "Cards" SET title = $1, description = $2 WHERE id = $3 RETURNING *`,
+      [title, description, id]
     );
 
     if (updatedSection.rows.length === 0) {
@@ -38,7 +37,7 @@ router.put("/:id", adminAuth, async (req, res) => {
     res.json({ section: updatedSection.rows[0] });
   } catch (error) {
     console.error("Error updating section:", error);
-    res.status(500).json({ message: "Internal server error" + error });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
