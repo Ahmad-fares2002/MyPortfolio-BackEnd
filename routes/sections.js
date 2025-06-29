@@ -30,7 +30,7 @@ router.put("/:id", adminAuth, async (req, res) => {
     res.json({ section: updatedSection.rows[0] });
   } catch (error) {
     console.error("Error updating section:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error: " + error });
   }
 });
 
