@@ -13,14 +13,14 @@ router.post("/", adminAuth, async (req, res) => {
   res.status(201).json({ section: section.rows });
 });
 // PUT /api/sections/:id
-router.put("/:title", adminAuth, async (req, res) => {
-  const { title } = req.params;
-  const { content } = req.body;
+router.put("/:id", adminAuth, async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
 
   try {
     const updatedSection = await db.query(
-      "UPDATE sections SET content = $1 WHERE title = $2 RETURNING *",
-      [content, title]
+      "UPDATE sections SET title= $1 content = $1 WHERE id = $3 RETURNING *",
+      [title, content, id]
     );
 
     if (updatedSection.rows.length === 0) {
