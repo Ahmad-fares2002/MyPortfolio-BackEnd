@@ -15,7 +15,7 @@ router.post("/", adminAuth, async (req, res) => {
     res.status(201).json({ section: section.rows[0] });
   } catch (error) {
     console.error("Error creating section:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" + error });
   }
 });
 
@@ -37,7 +37,7 @@ router.put("/:id", adminAuth, async (req, res) => {
     res.json({ section: updatedSection.rows[0] });
   } catch (error) {
     console.error("Error updating section:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" + error });
   }
 });
 
@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching Cards:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" + error });
   }
 });
 
@@ -72,7 +72,7 @@ router.delete("/:id", adminAuth, async (req, res) => {
     });
   } catch (error) {
     console.error("Error deleting section:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" + error });
   }
 });
 
